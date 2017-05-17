@@ -1,7 +1,19 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
+import {centeredContainer, largeHeader, errorMsg} from '../../sharedStyles/styles.css'
 
-export default function Authenticate (props) {
+Authenticate.propTypes = {
+  error: PropTypes.string.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  onAuth: PropTypes.func.isRequired
+}
+
+export default function Authenticate ({error, isFetching, onAuth}) {
   return (
-    <div>Authenticate</div>
+    <div className={centeredContainer}>
+      <h1 className={largeHeader}>Authenticate</h1>
+      <p>Facebook auth button</p>
+      {error ? <p className="errorMsg">{error}</p> : null}
+    </div>
   )
 }
