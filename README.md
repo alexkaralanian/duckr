@@ -2,7 +2,7 @@
 
 Duckr is a social media Twitter clone built with React-Redux. Currently in development...
 
-It features:
+Features:
 
 * React 15.4
 * Redux
