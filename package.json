@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "production": "webpack -p"
+    "production": "webpack -p",
+    "gitpush": "git add . && git commit -m 'new commit' && git push origin master"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
