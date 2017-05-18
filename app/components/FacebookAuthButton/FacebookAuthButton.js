@@ -2,12 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {button} from './styles.css'
 
-FacebookAuthButton.propTypes = {
-  onAuth: PropTypes.func.isrequired,
-  isFetching: PropTypes.bool.isRequired
-}
 
 export default function FacebookAuthButton ({onAuth, isFetching}) {
+
   return (
     <div>
       <button onClick={onAuth} className={button}>
@@ -18,4 +15,10 @@ export default function FacebookAuthButton ({onAuth, isFetching}) {
       </button>
     </div>
   )
+}
+
+
+FacebookAuthButton.propTypes = {
+  onAuth: PropTypes.func.isrequired,
+  isFetching: PropTypes.bool.isRequired
 }
