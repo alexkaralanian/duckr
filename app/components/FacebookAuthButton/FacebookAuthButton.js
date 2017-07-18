@@ -2,12 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {button} from './styles.css'
 
+// parent component is Authentcate.js
+// parent of that component is Authenticate Container.
 
-export default function FacebookAuthButton ({onAuth, isFetching}) {
+export default function FacebookAuthButton ({fetchAndHandleAuthedUser, isFetching}) {
 
   return (
     <div>
-      <button onClick={onAuth} className={button}>
+      <button onClick={fetchAndHandleAuthedUser} className={button}>
         { isFetching === true
           ? 'Loading'
           : 'Login With Facebook'
@@ -19,6 +21,6 @@ export default function FacebookAuthButton ({onAuth, isFetching}) {
 
 
 FacebookAuthButton.propTypes = {
-  onAuth: PropTypes.func.isrequired,
+  fetchAndHandleAuthedUser: PropTypes.func.isrequired,
   isFetching: PropTypes.bool.isRequired
 }

@@ -20,6 +20,7 @@ const unauthUser = () => ({
   type: UNAUTH_USER
 })
 
+// updates state to isFetching: true
 const fetchingUser = () => ({
   type: FETCHING_USER
 })
@@ -41,11 +42,20 @@ const fetchingUserSuccess = (uid, user, timestamp) => ({
 
 export const fetchAndHandleAuthedUser = () => {
   return function (dispatch) {
-    dispatch(fetchingUser())
-    return auth()
+    dispatch(fetchingUser()) // updates state to isFetching: true
+    return auth() // calls the AUTH function, which returns a user... (whoamI)
       .then((user) => dispatch(fetchingUserSuccess(user.uid, user, Date.now())))
-      .then((user) => dispatch(authUser(user.uid)))
-      .catch((error) => dispatch(fetchingUserFailure(error)))
+      // changes isFetching back to false
+        // if null, resets error to "" empty string, and returns current state.
+        // If not null eror is reset,  add user as key on state object as  username(uid), with an object as its value
+      /*
+        username: {
+          lastUpdated: Date.NOW()
+          info: action.user {}
+        }
+      */
+      .then((user) => dispatch(authUser(user.uid))) // changes isAuthed to true, and userID goes on state as authedID.
+      .catch((error) => dispatch(fetchingUserFailure(error))) // is an error, calls fetching user failure, throws an error and put error on state
   }
 }
 
@@ -124,11 +134,36 @@ export default function users (state = initialState, action) {
             isFetching: false,
             error: '',
             [action.uid]: user(state[action.uid], action),
-          // Here were calling the user action creator
+
+          // We call FETCHING USER SUCCESS from inside fetchAndHandleAuthUser
+          // we calling the user()
           // Recieves a section of state, and an action
-          // Creating reducer composition
+          // We are creating reducer composition
+          // WHAT IS GOING ON HERE w last part.... need to know what this function is doing more clearly...
         })
     default :
       return state
   }
 }
+
+// const initialUserState = {
+//   info: {
+//     name: '',
+//     uid: '',
+//     avatar: '',
+//   },
+// }
+
+// function user (state = initialUserState, action) {
+
+//   switch (action.type) {
+
+//     case FETCHING_USER_SUCCESS :
+//       return Object.assign({}, state, {
+//         info: action.user // passing the user object
+//       })
+//     default :
+//       return state
+//   }
+// }
+

@@ -6,7 +6,9 @@ import HomeContainer from '../containers/Home/HomeContainer'
 import AuthenticateContainer from '../containers/Authenticate/AuthenticateContainer'
 import { container } from './styles.css'
 
-// We are passing 'isAuthed' boolean prop down from the router to the Navigation Component
+// We are passing 'isAuthed' down from the State via the <Provider> to the Navigation Component, which will render a specific UI view depending on if isAuthed is true or false...
+
+// Switch checks to see if any routes match if not render default NOT FOUND component.
 
 const routes = (
   <BrowserRouter>

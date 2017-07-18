@@ -12,6 +12,7 @@ class AuthenticateContainer extends React.Component {
     super(props)
 
     this.handleAuth = this.handleAuth.bind(this)
+    console.log(props)
   }
 
   handleAuth() {
@@ -19,6 +20,16 @@ class AuthenticateContainer extends React.Component {
   }
 
   render(){
+
+    { /* Is receiving the STATE as props isFetching + error and passing down to child component.
+
+    Is receiving fetchAndHandleAuthuser function as props from
+    redux (we connect to Redux Store below) */
+    }
+
+    { /* Passing isFetching, error, and onAuth as props to
+    ../../components/Authenticate/Authenticate */
+    }
 
     return (
       <Authenticate
@@ -31,9 +42,9 @@ class AuthenticateContainer extends React.Component {
 }
 
 AuthenticateContainer.propTypes = {
-    fetchAndHandleAuthedUser: PropTypes.func.isRequired,
-    isFetching: PropTypes.bool.isRequired,
-    error: PropTypes.string.isRequired,
+    fetchAndHandleAuthedUser: PropTypes.func.isRequired, // redux thunk
+    isFetching: PropTypes.bool.isRequired, // state
+    error: PropTypes.string.isRequired, // state
 }
 
 const mapStateToProps = (state) => {
@@ -44,9 +55,13 @@ const mapStateToProps = (state) => {
   }
 }
 
+// Here we call map state to props to make sure that when we require state in from the reducer that it is 'mapped to state as props!'
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(userActionCreators, dispatch)
 }
+
+// Here we bind the fecthAndHandle Auth user function
 
 export default connect(
   mapStateToProps,
